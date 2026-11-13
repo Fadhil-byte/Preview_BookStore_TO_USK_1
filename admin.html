@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Pengelola Administrator - Toko Buku USK</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="preview-bar">
+        <div class="preview-bar-brand">
+            <span>PREVIEW MODE</span>
+            <span style="color: #64748b;">|</span>
+            <span>Toko Buku USK</span>
+        </div>
+        <div class="preview-bar-links">
+            <a href="index.html" class="preview-bar-link">1. Landing Page (Home)</a>
+            <a href="auth.html" class="preview-bar-link">2. Login &amp; Registrasi</a>
+            <a href="user.html" class="preview-bar-link">3. Halaman User (Pelanggan)</a>
+            <a href="admin.html" class="preview-bar-link active" style="background: #1e3a8a; border-color: #3b82f6; color: #ffffff;">4. Halaman Admin (Pengelola)</a>
+        </div>
+    </div>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <div class="nav-brand-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #ffffff;"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+                </div>
+                <span>BukuKita USK</span>
+            </a>
+
+            <nav class="nav-menu">
+                <a href="javascript:void(0)" class="nav-link active tab-btn" onclick="switchTab('admin-content-area', 'admin-pane-dashboard', this)">Dashboard</a>
+                <a href="javascript:void(0)" class="nav-link tab-btn" onclick="switchTab('admin-content-area', 'admin-pane-pesanan', this)">
+                    <span>Pesanan Masuk</span>
+                    <span class="nav-sub-badge" style="background: var(--danger); color: #fff;">1 baru</span>
+                </a>
+                <a href="javascript:void(0)" class="nav-link tab-btn" onclick="switchTab('admin-content-area', 'admin-pane-buku', this)">Kelola Buku</a>
+
+                <div class="nav-dropdown active">
+                    <button type="button" class="nav-dropdown-toggle">
+                        <span>Kelola Toko</span>
+                        <span style="font-size: 11px;">&#9660;</span>
+                        <span class="nav-notif-pill">2</span>
+                    </button>
+                    <div class="nav-dropdown-menu">
+                        <a href="javascript:void(0)" class="nav-dropdown-item" onclick="switchTab('admin-content-area', 'admin-pane-kategori', this)">
+                            <span>Kategori Buku</span>
+                        </a>
+                        <a href="javascript:void(0)" class="nav-dropdown-item" onclick="switchTab('admin-content-area', 'admin-pane-buku', this)">
+                            <span>+ Tambah Buku</span>
+                        </a>
+                        <a href="javascript:void(0)" class="nav-dropdown-item" onclick="switchTab('admin-content-area', 'admin-pane-pesanan', this)">
+                            <span>Pesanan Masuk</span>
+                            <span class="status-badge badge-danger" style="font-size: 10px; padding: 2px 6px;">1 baru</span>
+                        </a>
+                        <a href="javascript:void(0)" class="nav-dropdown-item" onclick="switchTab('admin-content-area', 'admin-pane-users', this)">
+                            <span>Data User</span>
+                        </a>
+                        <a href="javascript:void(0)" class="nav-dropdown-item" onclick="switchTab('admin-content-area', 'admin-pane-pesan', this)">
+                            <span>Pesan Masuk</span>
+                            <span class="status-badge badge-danger" style="font-size: 10px; padding: 2px 6px;">1 baru</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="nav-right">
+                <div class="user-badge">
+                    <span>Administrator Toko Buku</span>
+                    <span class="role-pill admin">admin</span>
+                </div>
+
+                <a href="auth.html" class="btn btn-secondary btn-sm" style="color: var(--danger);">Keluar</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" id="admin-content-area">
+        <div id="admin-pane-dashboard" class="tab-pane active">
+            <div class="hero-section" style="padding: 48px 32px; text-align: center;">
+                <div style="display: inline-block; background: rgba(255, 255, 255, 0.2); padding: 4px 14px; border-radius: var(--radius-full); font-size: 13px; font-weight: 600; margin-bottom: 12px;">
+                    Dashboard Administrator
+                </div>
+                <h1 class="hero-title" style="font-size: 32px;">Selamat Datang, Administrator Toko Buku</h1>
+                <p class="hero-subtitle" style="margin: 0 auto 24px; font-size: 16px;">
+                    Panel pengelolaan katalog buku, verifikasi transaksi pesanan masuk, dan tanggapan pesan pelanggan Toko Buku USK.
+                </p>
+                <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-secondary btn-lg" style="background: #ffffff; color: var(--primary); font-weight: 700;" onclick="switchTab('admin-content-area', 'admin-pane-buku', document.querySelectorAll('.nav-link')[2])">
+                        Katalog &amp; Tambah Buku &rarr;
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-lg" style="background: rgba(255,255,255,0.15); color: #ffffff; border-color: rgba(255,255,255,0.3);" onclick="switchTab('admin-content-area', 'admin-pane-pesanan', document.querySelectorAll('.nav-link')[1])">
+                        Pesanan Masuk
+                        <span style="background: var(--danger); color: #fff; font-size: 11px; padding: 2px 8px; border-radius: 9999px; margin-left: 6px;">1 baru</span>
+                    </button>
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
+                <div style="background: #fef2f2; border: 1.5px solid #fecaca; border-radius: var(--radius); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <span style="font-size: 14px; color: #991b1b; font-weight: 600;">
+                        Pemberitahuan: Ada <strong>1 pesanan baru</strong> yang memerlukan verifikasi dan pemrosesan.
+                    </span>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="switchTab('admin-content-area', 'admin-pane-pesanan', document.querySelectorAll('.nav-link')[1])">
+                        Periksa Pesanan &rarr;
+                    </button>
+                </div>
+                <div style="background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: var(--radius); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <span style="font-size: 14px; color: #1e40af; font-weight: 600;">
+                        Pemberitahuan: Ada <strong>1 pesan masuk</strong> dari pengguna yang belum dibaca.
+                    </span>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="switchTab('admin-content-area', 'admin-pane-pesan', null)">
+                        Buka Pesan Masuk &rarr;
+                    </button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card" style="text-align: center;">
+                    <div class="stat-value" style="color: var(--primary);">6</div>
+                    <div class="stat-label">Total Judul Buku</div>
+                </div>
+
+                <div class="stat-card" style="text-align: center;">
+                    <div class="stat-value" style="color: #0ea5e9;">3</div>
+                    <div class="stat-label">Kategori Literatur</div>
+                </div>
+
+                <div class="stat-card" style="text-align: center;">
+                    <div class="stat-value" style="color: #f59e0b;">3</div>
+                    <div class="stat-label">Total Pesanan (1 baru)</div>
+                </div>
+
+                <div class="stat-card" style="text-align: center;">
+                    <div class="stat-value" style="color: #10b981;">6</div>
+                    <div class="stat-label">Pengguna Terdaftar</div>
+                </div>
+
+                <div class="stat-card" style="text-align: center;">
+                    <div class="stat-value" style="color: #8b5cf6;">1</div>
+                    <div class="stat-label">Pesan Belum Dibalas</div>
+                </div>
+            </div>
+
+            <div class="card" style="padding: 32px; margin-bottom: 28px;">
+                <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 8px;">Panduan Tugas Administrator</h2>
+                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 24px;">Berikut alur pengelolaan data dan operasional yang perlu diperhatikan:</p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
+                    <div style="background: var(--background); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border-color);">
+                        <strong style="font-size: 16px; display: block; margin-bottom: 6px;">1. Pengelolaan Buku dan Kategori</strong>
+                        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
+                            Pastikan kategori buku telah terdaftar sebelum menambahkan judul buku baru beserta harga, stok, dan gambar sampul.
+                        </p>
+                    </div>
+
+                    <div style="background: var(--background); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border-color);">
+                        <strong style="font-size: 16px; display: block; margin-bottom: 6px;">2. Verifikasi Transaksi Masuk</strong>
+                        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
+                            Periksa keabsahan bukti transfer pembayaran pembeli, kemudian perbarui status transaksi menjadi Diproses atau Dikirim.
+                        </p>
+                    </div>
+
+                    <div style="background: var(--background); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border-color);">
+                        <strong style="font-size: 16px; display: block; margin-bottom: 6px;">3. Layanan Pertanyaan Pengguna</strong>
+                        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
+                            Tanggapi pesan masuk dari pembeli melalui fitur balasan agar kebutuhan pembaca dapat terlayani secara tepat.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="padding: 28px; background: linear-gradient(135deg, #eff6ff, #dbeafe); border-color: var(--primary-border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+                <div>
+                    <h3 style="font-size: 18px; font-weight: 800; color: #1e3a8a; margin-bottom: 4px;">Pintasan Menu Pengelolaan</h3>
+                    <p style="color: #3b82f6; font-size: 14px;">Akses seluruh menu administrasi melalui tombol pintas berikut.</p>
+                </div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-secondary" onclick="switchTab('admin-content-area', 'admin-pane-kategori', null)">Kategori</button>
+                    <button type="button" class="btn btn-primary" onclick="switchTab('admin-content-area', 'admin-pane-buku', null)">+ Tambah Buku</button>
+                    <button type="button" class="btn btn-secondary" onclick="switchTab('admin-content-area', 'admin-pane-pesanan', null)">Pesanan</button>
+                    <button type="button" class="btn btn-secondary" onclick="switchTab('admin-content-area', 'admin-pane-users', null)">Data User</button>
+                    <button type="button" class="btn btn-secondary" onclick="switchTab('admin-content-area', 'admin-pane-pesan', null)">Pesan Masuk</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="admin-pane-pesanan" class="tab-pane">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+                <div>
+                    <h1 style="font-size: 24px; font-weight: 800;">Daftar Pesanan Buku (Semua User)</h1>
+                    <p style="color: var(--text-muted); font-size: 14px;">Monitor seluruh transaksi pemesanan buku dari pengguna yang berbeda-beda</p>
+                </div>
+
+                <span class="status-badge badge-danger" style="font-size: 14px; padding: 6px 14px;">1 Pesanan Baru Perlu Konfirmasi</span>
+            </div>
+
+            <div class="card" style="padding: 18px 24px; margin-bottom: 24px;">
+                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 12px; align-items: center;">
+                    <input type="text" class="form-control" placeholder="Cari kode pesanan atau nama user/penerima..." value="">
+                    <select class="form-control">
+                        <option value="">-- Semua Status Pesanan --</option>
+                        <option value="Menunggu Konfirmasi" selected>Menunggu Konfirmasi</option>
+                        <option value="Diproses">Diproses</option>
+                        <option value="Dikirim">Dikirim</option>
+                        <option value="Selesai">Selesai</option>
+                    </select>
+                    <select class="form-control">
+                        <option value="">-- Semua Status Bayar --</option>
+                        <option value="Belum Dibayar">Belum Dibayar</option>
+                        <option value="Sudah Dibayar">Sudah Dibayar</option>
+                    </select>
+                    <div style="display: flex; gap: 6px;">
+                        <button type="button" class="btn btn-primary" onclick="showToast('Filter diterapkan!')">Filter</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="padding: 24px;">
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Kode Pesanan</th>
+                                <th>User Pemesan</th>
+                                <th>Penerima &amp; Alamat</th>
+                                <th>Total Tagihan</th>
+                                <th style="text-align: center;">Status Bayar</th>
+                                <th style="text-align: center;">Status Pesanan</th>
+                                <th style="text-align: center;">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="admin-order-15" style="background: #eff6ff; font-weight: 500;">
+                                <td>
+                                    <strong style="color: var(--primary); font-size: 15px;">USK-20261108-001</strong>
+                                    <span class="status-badge badge-danger" style="font-size: 10px; margin-left: 4px;">Baru</span>
+                                    <div style="font-size: 12px; color: var(--text-muted);">08/11/2026 14:20</div>
+                                    <div style="font-size: 11px; color: var(--text-muted);">2 item buku</div>
+                                </td>
+                                <td>
+                                    <div style="font-weight: 600;">Muhammad Fadhil</div>
+                                    <div style="font-size: 12px; color: var(--text-muted);">user@gmail.com</div>
+                                </td>
+                                <td>
+                                    <div><strong>Muhammad Fadhil</strong> (081234567890)</div>
+                                    <div style="font-size: 12px; color: var(--text-muted); max-width: 250px;">Jl. Teuku Nyak Arief No. 12, Syiah Kuala, Banda Aceh</div>
+                                </td>
+                                <td>
+                                    <strong style="font-size: 15px;">Rp 205.000</strong>
+                                    <div style="font-size: 11px; color: var(--text-muted);">Transfer Bank Mandiri</div>
+                                </td>
+                                <td style="text-align: center;">
+                                    <span class="status-badge badge-warning admin-status-bayar">Belum Bayar</span>
+                                </td>
+                                <td style="text-align: center;">
+                                    <span class="status-badge badge-warning admin-status-pesanan">Menunggu Konfirmasi</span>
+                                </td>
+                                <td style="text-align: center;">
+                                    <button type="button" class="btn btn-primary btn-sm" onclick="openOrderModal('USK-20261108-001', 'Muhammad Fadhil (user@gmail.com)', 'Laskar Pelangi (1x), Pemrograman Web (1x)', 'Rp 205.000', 'Menunggu Konfirmasi', 'uploads/bukti/bukti_15_1793952400.jfif')">
+                                        Tinjau &amp; Konfirmasi
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr id="admin-order-9">
+                                <td>
+                                    <strong style="color: var(--primary); font-size: 15px;">USK-20261104-009</strong>
+                                    <div style="font-size: 12px; color: var(--text-muted);">04/11/2026 09:15</div>
+                                </td>
+                                <td>
+                                    <div style="font-weight: 600;">Muhammad Fadhil</div>
+                                    <div style="font-size: 12px; color: var(--text-muted);">user@gmail.com</div>
+                                </td>
+                                <td>
+                                    <div><strong>Fadhil</strong> (085298765432)</div>
+                                    <div style="font-size: 12px; color: var(--text-muted);">Komplek Dosen USK Blok B No. 4</div>
+                                </td>
+                                <td>
+                                    <strong style="font-size: 15px;">Rp 98.000</strong>
+                                    <div style="font-size: 11px; color: var(--text-muted);">Transfer BSI</div>
+                                </td>
+                                <td style="text-align: center;">
+                                    <span class="status-badge badge-success">Sudah Bayar</span>
+                                </td>
+                                <td style="text-align: center;">
+                                    <span class="status-badge badge-success">Selesai</span>
+                                </td>
+                                <td style="text-align: center;">
+                                    <span style="font-size: 12px; color: var(--text-muted);">Selesai</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="admin-pane-buku" class="tab-pane">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                <div>
+                    <h1 style="font-size: 24px; font-weight: 800;">Tambah &amp; Kelola Buku</h1>
+                    <p style="color: var(--text-muted); font-size: 14px;">Masukkan judul buku baru atau sesuaikan stok dan harga katalog</p>
+                </div>
+            </div>
+
+            <div class="card" style="padding: 32px; margin-bottom: 32px;">
+                <h2 style="font-size: 18px; font-weight: 800; margin-bottom: 18px; color: var(--text-main);">Formulir Tambah Buku Baru</h2>
+                <form onsubmit="event.preventDefault(); showToast('Buku baru berhasil disimpan ke katalog!'); event.target.reset();">
+                    <div class="form-group">
+                        <label class="form-label" for="buku-judul">Judul Buku *</label>
+                        <input type="text" id="buku-judul" class="form-control" placeholder="Contoh: Pemrograman Framework Laravel 12 Lanjutan" required>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label class="form-label" for="buku-penulis">Nama Penulis *</label>
+                            <input type="text" id="buku-penulis" class="form-control" placeholder="Contoh: Andrea Hirata" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="buku-penerbit">Penerbit *</label>
+                            <input type="text" id="buku-penerbit" class="form-control" placeholder="Contoh: Informatika USK" required>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label class="form-label" for="buku-kategori">Kategori Buku *</label>
+                            <select id="buku-kategori" class="form-control" required>
+                                <option value="">-- Pilih Kategori --</option>
+                                <option value="1">Sains &amp; Teknologi</option>
+                                <option value="2">Sastra &amp; Fiksi</option>
+                                <option value="3">Pengembangan Diri</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="buku-tahun">Tahun Terbit *</label>
+                            <input type="number" id="buku-tahun" class="form-control" value="2026" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="buku-stok">Stok Buku *</label>
+                            <input type="number" id="buku-stok" class="form-control" value="10" min="0" required>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label class="form-label" for="buku-harga">Harga (Rp) *</label>
+                            <input type="number" id="buku-harga" class="form-control" value="85000" step="1000" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="buku-cover">Foto / Cover Buku</label>
+                            <input type="file" id="buku-cover" class="form-control" accept="image/*">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="buku-deskripsi">Deskripsi / Sinopsis Buku</label>
+                        <textarea id="buku-deskripsi" class="form-control" rows="3" placeholder="Tuliskan ringkasan isi buku..."></textarea>
+                    </div>
+
+                    <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px;">
+                        <button type="submit" class="btn btn-primary btn-lg">Simpan Buku ke Katalog</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card" style="padding: 24px;">
+                <h2 style="font-size: 18px; font-weight: 800; margin-bottom: 16px;">Daftar Buku Terdaftar di Toko</h2>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Cover</th>
+                                <th>Judul Buku</th>
+                                <th>Kategori</th>
+                                <th>Harga</th>
+                                <th>Stok</th>
+                                <th>Status</th>
+                                <th style="text-align: center;">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><img src="uploads/buku/1793927570_6aed2992d996d.jfif" style="width: 40px; height: 50px; object-fit: cover; border-radius: 4px;"></td>
+                                <td><strong>Laskar Pelangi</strong><div style="font-size: 12px; color: var(--text-muted);">Andrea Hirata &bull; 2005</div></td>
+                                <td>Sastra &amp; Fiksi</td>
+                                <td>Rp 85.000</td>
+                                <td><strong>15</strong></td>
+                                <td><span class="status-badge badge-success">Tersedia</span></td>
+                                <td style="text-align: center;">
+                                    <button class="btn btn-secondary btn-sm" onclick="showToast('Membuka formulir edit buku!')">Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><img src="uploads/buku/1793936379_6aed4bfbbd6fd.jpg" style="width: 40px; height: 50px; object-fit: cover; border-radius: 4px;"></td>
+                                <td><strong>Bumi Manusia</strong><div style="font-size: 12px; color: var(--text-muted);">Pramoedya Ananta Toer &bull; 1980</div></td>
+                                <td>Sastra &amp; Fiksi</td>
+                                <td>Rp 95.000</td>
+                                <td><strong>10</strong></td>
+                                <td><span class="status-badge badge-success">Tersedia</span></td>
+                                <td style="text-align: center;">
+                                    <button class="btn btn-secondary btn-sm" onclick="showToast('Membuka formulir edit buku!')">Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><img src="uploads/buku/1793936414_6aed4c1e99c5a.jfif" style="width: 40px; height: 50px; object-fit: cover; border-radius: 4px;"></td>
+                                <td><strong>Filosofi Teras</strong><div style="font-size: 12px; color: var(--text-muted);">Henry Manampiring &bull; 2018</div></td>
+                                <td>Pengembangan Diri</td>
+                                <td>Rp 98.000</td>
+                                <td><strong>8</strong></td>
+                                <td><span class="status-badge badge-success">Tersedia</span></td>
+                                <td style="text-align: center;">
+                                    <button class="btn btn-secondary btn-sm" onclick="showToast('Membuka formulir edit buku!')">Edit</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="admin-pane-kategori" class="tab-pane">
+            <div style="margin-bottom: 24px;">
+                <h1 style="font-size: 24px; font-weight: 800;">Manajemen Kategori Buku</h1>
+                <p style="color: var(--text-muted); font-size: 14px;">Kelola rumpun keilmuan dan klasifikasi literatur di toko buku</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px;">
+                <div class="card" style="padding: 24px;">
+                    <h2 style="font-size: 18px; font-weight: 800; margin-bottom: 16px;">Tambah Kategori</h2>
+                    <form onsubmit="event.preventDefault(); showToast('Kategori baru berhasil ditambahkan!'); event.target.reset();">
+                        <div class="form-group">
+                            <label class="form-label" for="kat-nama">Nama Kategori *</label>
+                            <input type="text" id="kat-nama" class="form-control" placeholder="Contoh: Ilmu Komputer" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="kat-deskripsi">Deskripsi</label>
+                            <textarea id="kat-deskripsi" class="form-control" rows="4" placeholder="Penjelasan singkat kategori..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Simpan Kategori</button>
+                    </form>
+                </div>
+
+                <div class="card" style="padding: 24px;">
+                    <h2 style="font-size: 18px; font-weight: 800; margin-bottom: 16px;">Daftar Kategori Aktif</h2>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Nama Kategori</th>
+                                    <th>Deskripsi</th>
+                                    <th>Jumlah Buku</th>
+                                    <th style="text-align: center;">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Sains &amp; Teknologi</strong></td>
+                                    <td>Buku-buku seputar sains, komputasi, dan teknik.</td>
+                                    <td><span class="status-badge badge-primary">2 buku</span></td>
+                                    <td style="text-align: center;">
+                                        <button class="btn btn-secondary btn-sm" onclick="showToast('Edit kategori')">Edit</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Sastra &amp; Fiksi</strong></td>
+                                    <td>Novel, cerpen, dan karya sastra pilihan.</td>
+                                    <td><span class="status-badge badge-primary">2 buku</span></td>
+                                    <td style="text-align: center;">
+                                        <button class="btn btn-secondary btn-sm" onclick="showToast('Edit kategori')">Edit</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Pengembangan Diri</strong></td>
+                                    <td>Buku motivasi, produktivitas, dan psikologi praktis.</td>
+                                    <td><span class="status-badge badge-primary">2 buku</span></td>
+                                    <td style="text-align: center;">
+                                        <button class="btn btn-secondary btn-sm" onclick="showToast('Edit kategori')">Edit</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="admin-pane-users" class="tab-pane">
+            <div style="margin-bottom: 24px;">
+                <h1 style="font-size: 24px; font-weight: 800;">Manajemen Data Pengguna</h1>
+                <p style="color: var(--text-muted); font-size: 14px;">Daftar seluruh akun pengguna dan administrator yang terdaftar di sistem Toko Buku USK</p>
+            </div>
+
+            <div class="card" style="padding: 24px;">
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama Lengkap</th>
+                                <th>Alamat Email</th>
+                                <th>Peran (Role)</th>
+                                <th>Total Transaksi</th>
+                                <th style="text-align: center;">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><strong>Administrator Toko Buku</strong></td>
+                                <td>admin@tokobuku.usk</td>
+                                <td><span class="role-pill admin">admin</span></td>
+                                <td>-</td>
+                                <td style="text-align: center; color: var(--text-muted); font-size: 12px;">Akun Utama</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td><strong>Muhammad Fadhil</strong></td>
+                                <td>user@gmail.com</td>
+                                <td><span class="role-pill user">user</span></td>
+                                <td>3 Pesanan</td>
+                                <td style="text-align: center;">
+                                    <button class="btn btn-danger btn-sm" onclick="showToast('Aksi hapus user')">Hapus</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><strong>fadhil</strong></td>
+                                <td>fadhil@gmail.com</td>
+                                <td><span class="role-pill user">user</span></td>
+                                <td>0 Pesanan</td>
+                                <td style="text-align: center;">
+                                    <button class="btn btn-danger btn-sm" onclick="showToast('Aksi hapus user')">Hapus</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td><strong>Danen</strong></td>
+                                <td>danen@gmail.com</td>
+                                <td><span class="role-pill user">user</span></td>
+                                <td>0 Pesanan</td>
+                                <td style="text-align: center;">
+                                    <button class="btn btn-danger btn-sm" onclick="showToast('Aksi hapus user')">Hapus</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="admin-pane-pesan" class="tab-pane">
+            <div style="margin-bottom: 24px;">
+                <h1 style="font-size: 24px; font-weight: 800;">Pesan Masuk dari Pelanggan</h1>
+                <p style="color: var(--text-muted); font-size: 14px;">Baca dan kirimkan tanggapan balasan terhadap pertanyaan pembeli</p>
+            </div>
+
+            <div class="card" style="padding: 24px;">
+                <div style="background: var(--background); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 20px; margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <div>
+                            <span class="status-badge badge-danger" id="pesan-status-2" style="font-size: 11px; margin-bottom: 6px; display: inline-block;">Belum Dibaca</span>
+                            <h3 style="font-size: 16px; font-weight: 800; color: var(--text-main);">Pertanyaan Ketersediaan Stok Buku Algoritma</h3>
+                            <div style="font-size: 12px; color: var(--text-muted);">
+                                Dari: <strong>Muhammad Fadhil</strong> (user@gmail.com) &bull; 13 Nov 2026, 08:00 WIB
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: #ffffff; padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 14px; color: var(--text-main); line-height: 1.6; margin-bottom: 16px;">
+                        "Halo admin, apakah buku Algoritma &amp; Struktur Data Tingkat Lanjut masih tersedia 5 eksemplar untuk kelompok praktikum kami?"
+                    </div>
+
+                    <form onsubmit="simulateAdminReply(event, 2)">
+                        <div class="form-group">
+                            <label class="form-label" for="reply-text-2">Tuliskan Balasan Admin *</label>
+                            <textarea id="reply-text-2" class="form-control" rows="3" placeholder="Tuliskan respon resmi administrator kepada pelanggan..." required></textarea>
+                        </div>
+                        <div style="display: flex; justify-content: flex-end;">
+                            <button type="submit" class="btn btn-primary">Kirim Balasan ke Pelanggan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="orderModal" class="modal-backdrop">
+        <div class="modal-box">
+            <div class="modal-header">
+                <div>
+                    <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 2px;">Tinjau &amp; Konfirmasi Pesanan</h3>
+                    <span id="modal-order-code" style="color: var(--primary); font-weight: 700; font-size: 14px;">USK-20261108-001</span>
+                </div>
+                <button type="button" onclick="closeOrderModal()" style="background:none; border:none; font-size:24px; cursor:pointer; color:var(--text-muted);">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom: 16px;">
+                    <div style="font-size: 12px; color: var(--text-muted);">Pemesan:</div>
+                    <div id="modal-order-user" style="font-weight: 700; font-size: 14px;">Muhammad Fadhil</div>
+                </div>
+                <div style="margin-bottom: 16px;">
+                    <div style="font-size: 12px; color: var(--text-muted);">Item Buku Dipesan:</div>
+                    <div id="modal-order-items" style="font-size: 13px; color: var(--text-main);">Laskar Pelangi (1x), Pemrograman Web (1x)</div>
+                </div>
+                <div style="margin-bottom: 16px;">
+                    <div style="font-size: 12px; color: var(--text-muted);">Total Tagihan:</div>
+                    <div id="modal-order-total" style="font-weight: 800; font-size: 16px; color: var(--primary);">Rp 205.000</div>
+                </div>
+                <div style="margin-bottom: 16px;">
+                    <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 6px;">Bukti Transfer Pembayaran:</div>
+                    <img id="modal-order-proof" src="uploads/bukti/bukti_15_1793952400.jfif" alt="Bukti Transfer" style="max-width: 100%; max-height: 220px; object-fit: contain; border-radius: var(--radius-sm); border: 1px solid var(--border-color); display: block; margin: 0 auto;">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeOrderModal()">Tutup</button>
+                <button type="button" class="btn btn-danger" onclick="adminUpdateOrderStatus(15, 'Dibatalkan')">Tolak / Batalkan</button>
+                <button type="button" class="btn btn-primary" onclick="adminUpdateOrderStatus(15, 'Diproses')">Verifikasi &amp; Setujui (Diproses)</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 Toko Buku USK. Sistem Pembelian &amp; Pengelolaan Katalog Buku.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
